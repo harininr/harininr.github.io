@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Harini Nagarajan - Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script defer src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+
+:root{
+  --bg-900: #07080b;
+  --bg-800: #0b0f14;
+  --panel: rgba(255,255,255,0.03);
+  --glass: rgba(255,255,255,0.04);
+  --neon: #00bfff;
+  --neon-2: #8af0ff;
+  --muted: #9fb9c9;
+  --accent-1: #0ff7e6;
+  --shadow: 0 8px 30px rgba(2,18,26,0.6);
+  --glass-border: rgba(255,255,255,0.04);
+  --max-width: 1200px;
+  --ease: cubic-bezier(.2,.9,.2,1);
+  --mono: 'Roboto Mono', monospace;
+  --ui: 'Inter', system-ui, sans-serif;
+}
+
+/* ===========================
+   GLOBAL RESET & BASE
+   =========================== */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--ui);
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(0,191,255,0.02), transparent 6%),
+              radial-gradient(900px 500px at 90% 90%, rgba(138,240,255,0.01), transparent 8%),
+              linear-gradient(180deg,var(--bg-900), var(--bg-800) 60%);
+  color:#e6eef6;
+  overflow-x: hidden;
+  overflow-y:auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .45s var(--ease), color .3s, transform 0.1s ease-out; /* Added transform for skew effect */
+  line-height:1.45;
+  scroll-behavior:smooth;
+}
+::selection { background: var(--neon); color: #000; text-shadow: none; }
+body.light{ background: linear-gradient(180deg,#f6fbff,#e9f6ff); color:#06121a; }
+
+/* ===========================
+   UTILITY & LAYOUT
+   =========================== */
+.container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+section{padding:90px 18px}
+h2.section-title{font-size:28px;text-align:center;color:var(--neon);margin-bottom:18px;font-weight:800}
+
+/* ===========================
+   UI COMPONENTS
+   =========================== */
+/* Header */
+header.site-header{
+  position:fixed;left:12px;right:12px;top:12px;height:72px;border-radius:12px;
+  display:flex;align-items:center;justify-content:space-between;padding:12px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--glass-border);
+  z-index:10050; backdrop-filter: blur(8px) saturate(120%);
+  box-shadow:0 8px 30px rgba(2,12,18,0.6);
+}
+.brand{ display:flex;gap:10px;align-items:center;font-weight:800;color:var(--neon);font-size:1.05rem;cursor:pointer; }
+.brand .logo-mark{ width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--neon),var(--neon-2)); display:flex;align-items:center;justify-content:center;color:#031018;font-weight:800;font-family:var(--mono); }
+.nav-links{display:flex;gap:12px;align-items:center}
+.nav-links a{ color:var(--muted);padding:8px 10px;border-radius:8px;font-weight:600;font-size:.95rem; text-decoration:none; transition: 0.2s; }
+.nav-links a:hover{color:var(--neon);transform:translateY(-2px)}
+.btn-main{ display:inline-flex;gap:10px;align-items:center;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--neon),var(--neon-2)); color:#021018;font-weight:800;border:none;cursor:pointer;box-shadow:0 12px 40px rgba(0,191,255,0.08); }
+.magnetic{display:inline-block;transform:translateZ(0);transition:transform .24s var(--ease)}
+
+/* Cursor */
+.cursor{
+  position:fixed;left:0;top:0;width:18px;height:18px;border-radius:999px;background:var(--neon);
+  z-index:120000;pointer-events:none;mix-blend-mode:screen;transform:translate(-50%,-50%);
+  box-shadow:0 0 20px rgba(0,191,255,0.3);
+  transition: width .12s, height .12s, background .15s;
+}
+
+/* Hero */
+.hero{ position:relative;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 18px; }
+.hero-stage{ width:100%;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center; }
+.hero-title{font-size:48px;line-height:1.02;color:linear-gradient(90deg,var(--neon),var(--neon-2));font-weight:900}
+.hero-sub{color:var(--muted);margin-top:12px;font-size:18px}
+
+/* Cards */
+.card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03); box-shadow: 0 14px 40px rgba(2,12,18,0.5); }
+.holo-card{ width:100%;max-width:420px;height:360px;border-radius:16px;padding:18px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); box-shadow: 0 30px 80px rgba(2,12,18,0.6); position:relative;overflow:hidden;backdrop-filter: blur(6px); }
+
+/* Projects Grid */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:18px}
+.project-card img { width: 100%; border-radius: 8px; margin-bottom: 10px; object-fit: cover; height: 180px; }
+
+/* Modals */
+.modal-full{ position:fixed;inset:0;background:rgba(2,6,9,0.9);z-index:130000;display:none;align-items:center;justify-content:center;padding:36px; }
+
+/* AI Widget */
+.ai-widget{ position:fixed; bottom:30px; left:30px; z-index:9000; display:flex; align-items:center; gap:10px; cursor:pointer; }
+.ai-icon{ width:50px; height:50px; border-radius:50%; background:var(--neon); display:flex; justify-content:center; align-items:center; font-size:24px; box-shadow:0 0 20px rgba(0,191,255,0.4); animation: float 3s ease-in-out infinite; }
+.ai-bubble{ background:#fff; color:#000; padding:10px 15px; border-radius:12px 12px 12px 0; font-weight:600; font-size:14px; opacity:0; transform:translateY(10px); transition:0.3s; pointer-events:none; }
+.ai-widget:hover .ai-bubble{ opacity:1; transform:translateY(0); }
+
+/* Canvases */
+canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+#netCanvas { z-index: 9000; mix-blend-mode: screen; }
+#trailCanvas { z-index: 11000; }
+#neonGridCanvas { z-index: -1; }
+
+/* ===========================
+   ULTRA EXTENSION STYLES
+   =========================== */
+/* CRT Overlay */
+.crt-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 9999; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%); background-size: 100% 4px; opacity: 0.15; }
+
+/* Spotlight Effect */
+.spotlight-card { position: relative; overflow: hidden; }
+.spotlight-card::before { content:''; position: absolute; top:0; left:0; right:0; bottom:0; background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; opacity: 0; transition: opacity 0.3s; mix-blend-mode: overlay; }
+.spotlight-card:hover::before { opacity: 1; }
+
+/* Toast */
+.cyber-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(0, 10, 16, 0.9); border: 1px solid var(--neon); color: var(--neon); padding: 12px 24px; border-radius: 8px; font-family: var(--mono); font-size: 14px; z-index: 10000; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 20px rgba(0, 191, 255, 0.2); }
+.cyber-toast.active { transform: translateX(-50%) translateY(0); }
+
+/* FPS & Progress */
+#fpsCounter { position: fixed; top: 10px; right: 10px; font-family: var(--mono); font-size: 10px; color: var(--muted); opacity: 0.5; pointer-events: none; z-index: 11000; }
+.progress-ring { position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; z-index: 900; pointer-events: none; transform: rotate(-90deg); }
+.progress-ring circle { stroke-dasharray: 113; stroke-dashoffset: 113; transition: stroke-dashoffset 0.1s; }
+.rgb-shift img { transition: filter 0.3s; }
+.rgb-shift:hover img { filter: drop-shadow(-4px 0 0 red) drop-shadow(4px 0 0 cyan); }
+
+/* Skill Bars */
+.skill-bar { height:6px; background:rgba(255,255,255,0.1); border-radius:99px; margin-top:8px; overflow:hidden; }
+.skill-fill { height:100%; background:var(--neon); width:0; transition:width 1.5s ease; }
+
+/* Responsive */
+@media (max-width:1100px){ .hero-stage{grid-template-columns:1fr} .holo-card{display:none;} }
+@media (max-width:720px){ header.site-header{left:8px;right:8px;padding:10px} .hero-title{font-size:28px} }
+</style>
+</head>
+<body aria-reduced-motion="false">
+
+<canvas id="neonGridCanvas"></canvas>
+<canvas id="netCanvas"></canvas>
+<canvas id="trailCanvas"></canvas>
+<canvas id="audioCanvas"></canvas>
+<canvas id="confettiCanvas"></canvas>
+<canvas id="heatmapCanvas"></canvas>
+<div class="crt-overlay"></div>
+
+<div id="cursor" class="cursor"></div>
+<div id="scrollProgress" style="position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--neon),var(--neon-2));z-index:99999;"></div>
+<div id="fpsCounter">FPS: 60</div>
+<div id="cyberToast" class="cyber-toast">System Notification</div>
+<svg class="progress-ring" width="40" height="40">
+  <circle stroke="var(--neon)" stroke-width="3" fill="transparent" r="18" cx="20" cy="20" />
+</svg>
+
+<div id="topPill" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;right:22px;bottom:70px;padding:10px 12px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);z-index:1200;cursor:pointer;color:var(--neon);font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;">
+  <i class="fas fa-arrow-up"></i> TOP
+</div>
+
+<header class="site-header">
+  <div class="header-left">
+    <div class="brand magnetic">
+      <div class="logo-mark">H</div>
+      <div>
+        <div style="font-size:.85rem;opacity:.9">Harini</div>
+        <div style="font-size:.68rem;color:var(--muted);margin-top:-2px">Designer • Dev</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="header-actions">
+    <button class="btn-main magnetic" id="hireBtn">Hire Me</button>
+    <button class="dark-mode-toggle" style="background:transparent;border:0;color:var(--neon);font-size:18px;cursor:pointer;margin-left:10px"><i class="fas fa-adjust"></i></button>
+  </div>
+</header>
+
+<section id="hero" class="hero">
+  <div class="container hero-stage">
+    <div class="hero-left">
+      <div class="hero-eyebrow" style="font-weight:700;color:var(--neon);letter-spacing:0.6px;margin-bottom:8px">Hi, I build delightful digital things</div>
+      <h1 class="hero-title" data-value="Harini — Product Designer & Frontend Engineer">Harini Nagarajan</h1>
+      <p class="hero-sub">I combine design systems, micro-interactions and modern frontend to build high-performance experiences that humans love.</p>
+      <div style="display:flex;gap:12px;margin-top:18px;align-items:center">
+        <button class="btn-main magnetic" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">View Projects</button>
+        <button class="magnetic" style="padding:10px 14px;border-radius:12px;background:transparent;border:1px solid var(--glass-border);color:white;cursor:pointer">Resume</button>
+      </div>
+    </div>
+
+    <aside class="holo-card magnetic">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-weight:800;color:var(--neon)">Live Stats</div>
+        <div style="font-size:.85rem;color:var(--muted)">Realtime</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <div class="card" style="flex:1;min-width:80px;text-align:center">
+          <div style="font-size:12px;color:var(--muted)">Projects</div>
+          <div style="font-weight:800;font-size:20px;color:var(--neon)" id="projectsCount">0</div>
+        </div>
+        <div class="card" style="flex:1;min-width:80px;text-align:center">
+          <div style="font-size:12px;color:var(--muted)">Clients</div>
+          <div style="font-weight:800;font-size:20px;color:var(--neon)" id="clientsCount">0</div>
+        </div>
+      </div>
+      <div style="height:100px;display:flex;align-items:flex-end;gap:5px;padding-bottom:10px">
+        <div style="width:20%;background:var(--neon);height:40%;border-radius:4px"></div>
+        <div style="width:20%;background:var(--neon);height:70%;border-radius:4px"></div>
+        <div style="width:20%;background:var(--neon);height:50%;border-radius:4px"></div>
+        <div style="width:20%;background:var(--neon);height:90%;border-radius:4px"></div>
+        <div style="width:20%;background:var(--neon);height:30%;border-radius:4px"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="about" class="card" style="margin:0 18px">
+  <div class="container">
+    <h2 class="section-title" data-value="About & Skills">About & Skills</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:30px">
+      <div>
+        <img src="https://via.placeholder.com/240" style="width:150px;height:150px;border-radius:50%;object-fit:cover;border:2px solid var(--neon);margin-bottom:20px">
+        <p style="color:var(--muted);line-height:1.6">I design and build delightful digital products — focusing on accessible interfaces, animations that communicate, and fast frontend engineering. I love converting coffee into code.</p>
+      </div>
+      <div>
+        <div style="margin-bottom:15px">
+          <div style="display:flex;justify-content:space-between"><strong>HTML/CSS</strong><span>95%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+        </div>
+        <div style="margin-bottom:15px">
+          <div style="display:flex;justify-content:space-between"><strong>JavaScript (ES6+)</strong><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div style="margin-bottom:15px">
+          <div style="display:flex;justify-content:space-between"><strong>React/Vue</strong><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title" data-value="Selected Projects">Selected Projects</h2>
+    <div class="projects-grid">
+      <div class="card project-card" data-title="UI Dashboard" data-desc="A modern UI dashboard with animated charts and dark-mode.">
+        <img src="https://via.placeholder.com/600x380/021018/00bfff?text=Dashboard+UI" alt="Project 1">
+        <h3 style="margin-bottom:5px;color:var(--neon)">UI Dashboard</h3>
+        <p style="color:var(--muted);font-size:0.9rem">React • D3.js • Design System</p>
+      </div>
+      <div class="card project-card" data-title="E-Commerce PWA" data-desc="Offline-first shopping experience with payment simulation.">
+        <img src="https://via.placeholder.com/600x380/021018/0ff7e6?text=E-Commerce+App" alt="Project 2">
+        <h3 style="margin-bottom:5px;color:var(--neon)">E-Commerce PWA</h3>
+        <p style="color:var(--muted);font-size:0.9rem">Vue • Firebase • Stripe</p>
+      </div>
+      <div class="card project-card" data-title="Neon Portfolio" data-desc="The engine running this very site.">
+        <img src="https://via.placeholder.com/600x380/021018/ff00ff?text=Portfolio+Engine" alt="Project 3">
+        <h3 style="margin-bottom:5px;color:var(--neon)">Portfolio Engine</h3>
+        <p style="color:var(--muted);font-size:0.9rem">Vanilla JS • Web Audio API • Canvas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="margin-bottom:80px">
+  <div class="container">
+    <h2 class="section-title" data-value="Get In Touch">Get In Touch</h2>
+    <form class="card" style="max-width:600px;margin:0 auto;padding:30px" onsubmit="event.preventDefault(); document.getElementById('cyberToast').classList.add('active'); setTimeout(()=>document.getElementById('cyberToast').classList.remove('active'),3000);">
+      <div style="margin-bottom:15px">
+        <label style="display:block;margin-bottom:5px;color:var(--muted)">Name</label>
+        <input type="text" style="width:100%;padding:10px;background:rgba(0,0,0,0.2);border:1px solid var(--panel);color:white;border-radius:6px">
+      </div>
+      <div style="margin-bottom:15px">
+        <label style="display:block;margin-bottom:5px;color:var(--muted)">Email</label>
+        <input type="email" style="width:100%;padding:10px;background:rgba(0,0,0,0.2);border:1px solid var(--panel);color:white;border-radius:6px">
+      </div>
+      <div style="margin-bottom:15px">
+        <label style="display:block;margin-bottom:5px;color:var(--muted)">Message</label>
+        <textarea rows="4" style="width:100%;padding:10px;background:rgba(0,0,0,0.2);border:1px solid var(--panel);color:white;border-radius:6px"></textarea>
+      </div>
+      <button type="submit" class="btn-main magnetic" style="width:100%;justify-content:center">Send Transmission</button>
+    </form>
+  </div>
+</section>
+
+<footer style="padding:40px;text-align:center;color:var(--muted);border-top:1px solid var(--glass-border)">
+  <p>© 2025 Harini. Built with Neon & Chaos.</p>
+</footer>
+
+<div id="modalFull" class="modal-full">
+  <div class="card" style="max-width:800px;width:100%;position:relative">
+    <button onclick="document.getElementById('modalFull').style.display='none'" style="position:absolute;right:15px;top:15px;background:none;border:none;color:white;font-size:20px;cursor:pointer">✕</button>
+    <h2 id="modalTitle" style="color:var(--neon);margin-bottom:10px">Project</h2>
+    <img id="modalImg" src="" style="width:100%;height:300px;object-fit:cover;border-radius:8px;margin-bottom:15px">
+    <p id="modalDesc" style="color:var(--muted)">Description goes here.</p>
+  </div>
+</div>
+
+<div id="aiAssistant" class="ai-widget">
+  <div id="aiBubble" class="ai-bubble">Hi! Try asking about "projects" or type "confetti"!</div>
+  <div id="aiIcon" class="ai-icon">🤖</div>
+</div>
+
+<canvas id="matrixLayer" style="display:none;z-index:99999;background:black"></canvas>
+
+<script>
+/* THE ULTRA ENGINE 
+   Combines Core Logic + Ultra Extensions 
+*/
+
+const S = {
+  mouse: { x: innerWidth/2, y: innerHeight/2, down:false },
+  dots: [], confetti: [], heatmap: [],
+  audio: { analyser: null, data: null, enabled:false },
+  colors: { neon: '#00bfff' },
+  voice: { listening: false }
+};
+
+/* 1. UTILS */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const rand = (a,b)=> a + Math.random()*(b-a);
+const hexToRgba = (hex, alpha=1) => {
+   // simple hex conversion
+   let r=0,g=0,b=0;
+   if(hex.length==4){r=parseInt("0x"+hex[1]+hex[1]);g=parseInt("0x"+hex[2]+hex[2]);b=parseInt("0x"+hex[3]+hex[3]);}
+   else if(hex.length==7){r=parseInt("0x"+hex[1]+hex[2]);g=parseInt("0x"+hex[3]+hex[4]);b=parseInt("0x"+hex[5]+hex[6]);}
+   return `rgba(${r},${g},${b},${alpha})`;
+};
+
+/* 2. MOUSE & CURSOR */
+const cursor = $('#cursor');
+document.addEventListener('pointermove', e=>{
+  S.mouse.x = e.clientX; S.mouse.y = e.clientY;
+  if(cursor) { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; }
+  // Spotlight logic
+  $$('.spotlight-card').forEach(card => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--x', (e.clientX - rect.left) + 'px');
+      card.style.setProperty('--y', (e.clientY - rect.top) + 'px');
+  });
+});
+document.addEventListener('pointerdown', ()=> { if(cursor) cursor.style.transform = 'translate(-50%,-50%) scale(1.5)'; });
+document.addEventListener('pointerup', ()=> { if(cursor) cursor.style.transform = 'translate(-50%,-50%) scale(1)'; });
+
+/* 3. CANVAS: TRAIL & DOTS */
+(function initTrail(){
+  const c = $('#trailCanvas'); const ctx = c.getContext('2d');
+  let w,h; const resize=()=>{w=c.width=innerWidth; h=c.height=innerHeight;}; resize();
+  window.addEventListener('resize', resize);
+  
+  document.addEventListener('pointermove', e=>{
+    S.dots.push({x:e.clientX, y:e.clientY, r:rand(2,5), life:60, vx:(Math.random()-0.5), vy:(Math.random()-0.5)});
+  });
+
+  function loop(){
+    ctx.clearRect(0,0,w,h);
+    for(let i=0;i<S.dots.length;i++){
+      let p = S.dots[i];
+      p.life--; p.x+=p.vx; p.y+=p.vy; p.r*=0.95;
+      ctx.fillStyle = `rgba(0,191,255,${p.life/60})`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      if(p.life<=0) {S.dots.splice(i,1); i--;}
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* 4. CANVAS: NEON GRID (PARALLAX) */
+(function initGrid(){
+  const c = $('#neonGridCanvas'); const ctx = c.getContext('2d');
+  let w,h; const resize=()=>{w=c.width=innerWidth; h=c.height=innerHeight;}; resize();
+  window.addEventListener('resize', resize);
+  let ox=0, oy=0;
+  function loop(){
+    ctx.clearRect(0,0,w,h);
+    ox += (S.mouse.x - w/2)*0.001; oy += (S.mouse.y - h/2)*0.001;
+    ctx.strokeStyle = 'rgba(0,191,255,0.03)'; ctx.lineWidth=1;
+    const space = 60;
+    for(let x=ox%space; x<w; x+=space) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+    for(let y=oy%space; y<h; y+=space) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* 5. UI: MAGNETIC BUTTONS */
+$$('.magnetic').forEach(btn => {
+  btn.addEventListener('pointermove', e => {
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width/2);
+    const y = e.clientY - (r.top + r.height/2);
+    btn.style.transform = `translate(${x*0.2}px, ${y*0.2}px)`;
+  });
+  btn.addEventListener('pointerleave', ()=> btn.style.transform = 'translate(0,0)');
+});
+
+/* 6. UI: SCROLL PROGRESS & SKEW */
+let lastScroll = window.scrollY;
+window.addEventListener('scroll', ()=>{
+   const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+   const scrolled = (winScroll / height) * 100;
+   $('#scrollProgress').style.width = scrolled + "%";
+   
+   // Circular Progress
+   const offset = 113 - (113 * (scrolled/100));
+   $('.progress-ring circle').style.strokeDashoffset = offset;
+
+   // Skew Effect (Physics)
+   const diff = winScroll - lastScroll;
+   const skew = Math.min(Math.max(diff * 0.1, -5), 5);
+   document.body.style.transform = `skewY(${skew}deg)`;
+   clearTimeout(window.skewTimer);
+   window.skewTimer = setTimeout(()=> document.body.style.transform = 'none', 100);
+   lastScroll = winScroll;
+});
+
+/* 7. AUDIO VISUALIZER & SYNTH SOUNDS */
+const AudioEngine = {
+  ctx: null,
+  init() {
+    window.addEventListener('click', ()=>{
+      if(!this.ctx) {
+         const C = window.AudioContext || window.webkitAudioContext;
+         this.ctx = new C();
+         this.enableMic();
+      }
+    }, {once:true});
+    
+    // Synth sounds on hover
+    $$('a, button, .card').forEach(el => {
+      el.addEventListener('mouseenter', ()=> this.beep(800, 'triangle'));
+      el.addEventListener('click', ()=> this.beep(400, 'square'));
+    });
+  },
+  enableMic(){
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+       const src = this.ctx.createMediaStreamSource(stream);
+       const ana = this.ctx.createAnalyser();
+       ana.fftSize = 256;
+       src.connect(ana);
+       S.audio.analyser = ana;
+       S.audio.data = new Uint8Array(ana.frequencyBinCount);
+       S.audio.enabled = true;
+       this.visualize();
+    }).catch(e=>console.log("Audio denied"));
+  },
+  visualize(){
+     const c = $('#audioCanvas'); const ctx = c.getContext('2d');
+     const loop = () => {
+       if(S.audio.enabled) {
+         S.audio.analyser.getByteFrequencyData(S.audio.data);
+         ctx.clearRect(0,0,c.width,c.height);
+         const barW = c.width / S.audio.data.length;
+         for(let i=0; i<S.audio.data.length; i++){
+            const h = S.audio.data[i];
+            ctx.fillStyle = `rgba(0,191,255,${h/255})`;
+            ctx.fillRect(i*barW, c.height - h/2, barW-2, h/2);
+         }
+       }
+       requestAnimationFrame(loop);
+     };
+     loop();
+  },
+  beep(freq, type){
+    if(!this.ctx) return;
+    const osc = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    osc.type = type; osc.frequency.value = freq;
+    g.gain.setValueAtTime(0.02, this.ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.1);
+    osc.connect(g); g.connect(this.ctx.destination);
+    osc.start(); osc.stop(this.ctx.currentTime + 0.1);
+  }
+};
+AudioEngine.init();
+
+/* 8. CONFETTI */
+const Confetti = {
+  spawn(x,y){
+     const c = $('#confettiCanvas'); const ctx = c.getContext('2d');
+     c.width=innerWidth; c.height=innerHeight;
+     for(let i=0; i<30; i++){
+       S.confetti.push({
+         x:x, y:y, vx:rand(-5,5), vy:rand(-10,-2), color:['#00bfff','#fff','#f0f'][Math.floor(Math.random()*3)],
+         life:100, r:rand(4,8)
+       });
+     }
+     if(!this.running) { this.running=true; this.loop(ctx, c); }
+  },
+  loop(ctx, c){
+    ctx.clearRect(0,0,c.width,c.height);
+    S.confetti.forEach((p,i)=>{
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.3; p.life--;
+      ctx.fillStyle=p.color; ctx.fillRect(p.x,p.y,p.r,p.r);
+      if(p.life<=0) S.confetti.splice(i,1);
+    });
+    if(S.confetti.length) requestAnimationFrame(()=>this.loop(ctx,c)); else this.running=false;
+  }
+};
+
+/* 9. AI WIDGET LOGIC */
+$('#aiAssistant').addEventListener('click', ()=>{
+   const q = prompt("Ask the portfolio (e.g., 'projects', 'contact', 'confetti')");
+   if(!q) return;
+   const t = q.toLowerCase();
+   let a = "I don't know that yet.";
+   if(t.includes('project')) { a="Opening projects..."; $('#projects').scrollIntoView({behavior:'smooth'}); }
+   else if(t.includes('contact')) { a="Scrolling to contact..."; $('#contact').scrollIntoView({behavior:'smooth'}); }
+   else if(t.includes('confetti')) { a="Party time!"; Confetti.spawn(innerWidth/2, innerHeight/2); }
+   else if(t.includes('matrix')) { a="Enter the matrix..."; toggleMatrix(); }
+   $('#aiBubble').innerText = a;
+});
+
+/* 10. MODAL LOGIC */
+$$('.project-card').forEach(card => {
+   card.addEventListener('click', ()=>{
+      $('#modalTitle').innerText = card.dataset.title;
+      $('#modalDesc').innerText = card.dataset.desc;
+      $('#modalImg').src = card.querySelector('img').src;
+      $('#modalFull').style.display = 'flex';
+   });
+});
+
+/* 11. HACKER TEXT DECRYPTION */
+$$('[data-value]').forEach(el => {
+  el.addEventListener('mouseover', event => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let iter = 0;
+    const interval = setInterval(() => {
+      event.target.innerText = event.target.innerText.split("").map((l, i) => {
+        if(i < iter) return event.target.dataset.value[i];
+        return letters[Math.floor(Math.random() * 26)];
+      }).join("");
+      if(iter >= event.target.dataset.value.length) clearInterval(interval);
+      iter += 1/3;
+    }, 30);
+  });
+});
+
+/* 12. KONAMI CODE */
+let kKeys = []; const code = "38384040373937396665";
+document.addEventListener('keydown', e => {
+  kKeys.push(e.keyCode);
+  if(kKeys.toString().indexOf(code) >= 0) {
+     alert('GOD MODE ACTIVATED'); 
+     document.body.style.filter = "invert(1) hue-rotate(180deg)";
+     kKeys = [];
+  }
+});
+
+/* 13. FPS COUNTER */
+let lastTime=0, frames=0;
+function fpsLoop(t){
+  frames++;
+  if(t-lastTime >= 1000) { $('#fpsCounter').innerText = `FPS: ${frames}`; frames=0; lastTime=t; }
+  requestAnimationFrame(fpsLoop);
+}
+requestAnimationFrame(fpsLoop);
+
+/* 14. MATRIX MODE */
+function toggleMatrix(){
+  const canvas = $('#matrixLayer');
+  if(canvas.style.display !== 'none') { canvas.style.display='none'; return; }
+  canvas.style.display = 'block';
+  canvas.width = innerWidth; canvas.height = innerHeight;
+  const ctx = canvas.getContext('2d');
+  const cols = Math.floor(innerWidth/20);
+  const ypos = Array(cols).fill(0);
+  function mLoop(){
+    if(canvas.style.display==='none') return;
+    ctx.fillStyle = 'rgba(0,0,0,0.05)'; ctx.fillRect(0,0,innerWidth,innerHeight);
+    ctx.fillStyle = '#0f0'; ctx.font = '15px monospace';
+    ypos.forEach((y,i)=>{
+       const text = String.fromCharCode(Math.random()*128);
+       ctx.fillText(text, i*20, y);
+       if(y>innerHeight && Math.random()>0.975) ypos[i]=0;
+       ypos[i]+=20;
+    });
+    requestAnimationFrame(mLoop);
+  }
+  mLoop();
+}
+
+/* 15. COUNTER ANIMATION */
+function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    obj.innerHTML = Math.floor(progress * (end - start) + start);
+    if (progress < 1) window.requestAnimationFrame(step);
+  };
+  window.requestAnimationFrame(step);
+}
+setTimeout(()=>{ animateValue($('#projectsCount'), 0, 28, 2000); animateValue($('#clientsCount'), 0, 12, 2000); }, 1000);
+
+/* 16. TAB TITLE CHANGER */
+document.addEventListener('visibilitychange', () => {
+  document.title = document.hidden ? "⚡ System Offline..." : "Harini — Ultimate Portfolio";
+});
+
+/* 17. COPY TOAST */
+document.addEventListener('copy', () => {
+   const t = $('#cyberToast');
+   t.innerText = "Content Copied to Clipboard";
+   t.classList.add('active');
+   setTimeout(()=>t.classList.remove('active'), 3000);
+});
+
+/* 18. INITIALIZATION LOG */
+console.log("%c SYSTEM READY ", "background:#00bfff; color:black; padding:5px; font-weight:bold;");
+
+</script>
+</body>
+</html>
