@@ -38,4 +38,22 @@ This portfolio is designed not just to present information, but to reflect **eng
 
 ---
 
+## Project Structure
+
+```txt
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── Hero.jsx
+│   ├── Projects.jsx
+│   ├── Skills.jsx
+│   ├── Education.jsx
+│   ├── Certifications.jsx
+│   ├── ThemeToggle.jsx
+│   └── FloatingShape.jsx
+│
+├── App.jsx
+├── App.css
+└── index.js
+
 
