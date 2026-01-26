@@ -1,46 +1,51 @@
-# Harini Nagarajan — Portfolio
+Harini Nagarajan — Portfolio
 
-**Live Website:** https://harininr.github.io  
+Live Website: https://harininr.github.io
 
-A modern, interactive portfolio showcasing my work, skills, and academic journey as a **Computer Science Engineering undergraduate** with strong interests in **Full-Stack Development, Machine Learning, Embedded Systems, and Cloud Computing**.
+A modern, responsive portfolio built using React to showcase my projects, technical skills, and academic journey as a Computer Science Engineering undergraduate.
 
-This portfolio is designed not just to present information, but to reflect **engineering mindset, clean architecture, and attention to detail**.
+This portfolio is designed to reflect an engineering mindset, with emphasis on clean UI/UX, maintainable architecture, and attention to detail.
 
----
+Features
 
-## Highlights
+Light and dark theme toggle
 
-- Elegant **light / dark theme toggle**
-- Smooth **scroll-spy navigation**
-- Subtle **animated background & mouse-glow effects**
-- Fully **responsive design**
-- Clean **component-based React architecture**
-- Optimized for **performance and readability**
+Scroll-spy navigation for smooth section tracking
 
----
+Subtle background animations and interactive visual effects
 
-## Tech Stack
+Fully responsive design for all screen sizes
 
-### Frontend
-- **React.js**
-- Modern JavaScript (ES6+)
-- Component-driven architecture
+Component-based React architecture
 
-### Styling & UI
-- Custom CSS with CSS variables
-- Theme-based design system
-- Smooth transitions & animations
-- Responsive layouts (mobile-first approach)
+Optimized for performance, accessibility, and readability
 
-### Deployment
-- **GitHub Pages**
-- Automated build & deployment workflow
+Tech Stack
+Frontend
 
----
+React.js
 
-## Project Structure
+Modern JavaScript (ES6+)
 
-```txt
+Functional components and hooks
+
+Styling and UI
+
+Custom CSS with CSS variables
+
+Theme-based design system
+
+Smooth transitions and animations
+
+Mobile-first responsive layout
+
+Deployment
+
+GitHub Pages
+
+Automated build and deployment workflow
+
+Project Structure
 src/
 ├── components/
 │   ├── Header.jsx
@@ -57,3 +62,6 @@ src/
 └── index.js
 
 
+Purpose
+
+This portfolio serves as a central place to document and present my technical growth, projects, and design approach, and is continuously updated as I learn and build new things.
