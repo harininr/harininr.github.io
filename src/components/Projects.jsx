@@ -1,65 +1,140 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github, Layers } from 'lucide-react';
+
+const ProjectCard = ({ title, description, tags, github, demo, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.1, duration: 0.8 }}
+    whileHover={{ y: -10 }}
+    className="group relative h-full"
+  >
+    <div className="absolute -inset-0.5 bg-gradient-to-r from-sage/50 to-emerald/50 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+    <div className="relative h-full glass-card p-8 rounded-3xl overflow-hidden flex flex-col border border-sage/10 group-hover:border-sage/30">
+      <div className="flex justify-between items-start mb-6">
+        <div className="w-12 h-12 bg-sage/10 rounded-2xl flex items-center justify-center text-sage">
+          <Layers size={24} />
+        </div>
+        <div className="flex gap-3">
+          {github && (
+            <a href={github} target="_blank" rel="noreferrer" className="p-2 glass rounded-full text-sage/60 hover:text-beige transition-colors">
+              <Github size={20} />
+            </a>
+          )}
+          {demo && (
+            <a href={demo} target="_blank" rel="noreferrer" className="p-2 glass rounded-full text-sage/60 hover:text-beige transition-colors">
+              <ExternalLink size={20} />
+            </a>
+          )}
+        </div>
+      </div>
+
+      <h3 className="text-2xl font-bold text-beige mb-4 group-hover:text-sage transition-colors duration-300">{title}</h3>
+      <p className="text-beige/80 font-light text-sm leading-relaxed mb-6 flex-grow bg-sage/5 p-4 rounded-xl border border-sage/10 backdrop-blur-sm">
+        {description}
+      </p>
+
+      <div className="flex flex-wrap gap-2 mb-6">
+        {tags.map((tag, i) => (
+          <span key={i} className="text-[10px] uppercase tracking-widest font-bold text-sage/50 bg-sage/5 px-3 py-1 rounded-full border border-sage/10">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="w-full py-3 bg-sage/10 hover:bg-sage text-sage hover:text-white font-bold rounded-2xl transition-all duration-300 border border-sage/20"
+      >
+        Explore Case Study
+      </motion.button>
+      
+      {/* 3D Reflection Effect */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+    </div>
+  </motion.div>
+);
 
 const Projects = () => {
   const projects = [
     {
-      title: "AuraGlow – Interactive Skincare Website",
-      description: "Fully responsive multi-page skincare website with dark/light mode, animated transitions, and packaged as cross-platform desktop app using Electron.js.",
-      tags: ["HTML5", "CSS3", "JavaScript", "Electron.js", "UI/UX"],
-      features: ["40% engagement boost", "Multi-device performance", "Reusable components"]
+      title: "Amrita Placement Tracker",
+      description: "A comprehensive platform to track and manage student placement data, featuring real-time analytics and reporting for administrators and students.",
+      tags: ["React", "Node.js", "MySQL", "Chart.js"],
+      github: "https://github.com/harininr"
     },
     {
-      title: "TNPSC Study Hub",
-      description: "Comprehensive study platform for TNPSC exam preparation with interactive modules and progress tracking.",
-      tags: ["React", "Node.js", "MongoDB", "Full-Stack"],
-      features: ["Interactive learning", "Progress tracking", "Mobile responsive"]
+      title: "CyberLearn",
+      description: "An interactive e-learning platform focused on cybersecurity, providing hands-on labs and progress tracking for budding security enthusiasts.",
+      tags: ["Full Stack", "MongoDB", "Express", "Auth"],
+      github: "https://github.com/harininr"
     },
     {
-      title: "ASL Gesture Recognition using DIP",
-      description: "Real-time American Sign Language detection system using classical image processing and deep learning techniques.",
-      tags: ["Python", "OpenCV", "Deep Learning", "Computer Vision"],
-      features: ["Real-time detection", "Adaptive thresholding", "Low-latency processing"]
+      title: "RightPath",
+      description: "AI-driven career guidance system that analyzes user skills and preferences to suggest personalized educational and professional paths.",
+      tags: ["AI/ML", "Python", "Flask", "React"],
+      github: "https://github.com/harininr"
     },
     {
-      title: "Real-Time Content Filtering Engine",
-      description: "High-performance C++ text-filtering engine using Rabin-Karp algorithm for O(n) banned-word detection.",
-      tags: ["C++", "Apache", "PHP", "Algorithms"],
-      features: ["Sub-100ms moderation", "Hot-reload configuration", "Dynamic alerts"]
+      title: "OneSheet",
+      description: "A centralized dashboard for students to manage all their academic resources, assignments, and schedules in one elegant interface.",
+      tags: ["React", "Tailwind", "Firebase"],
+      github: "https://github.com/harininr"
     },
     {
-      title: "Mathematical Symbol Classifier",
-      description: "CNN-based classifier for 369 mathematical symbols using Scikit-learn with 90%+ validation accuracy.",
-      tags: ["Python", "Scikit-learn", "CNN", "Data Augmentation"],
-      features: ["90%+ accuracy", "Data augmentation", "Model visualization"]
+      title: "AuraGlow",
+      description: "E-commerce platform for premium skincare products, featuring a sophisticated UI/UX with glassmorphism and immersive product galleries.",
+      tags: ["React", "Stripe", "Redux", "GSAP"],
+      github: "https://github.com/harininr"
     },
     {
-      title: "Morse Code Encoder/Decoder",
-      description: "Embedded system project for encoding and decoding Morse code using Tinkercad simulations.",
-      tags: ["Embedded C", "STM32", "Tinkercad", "Embedded Systems"],
-      features: ["Hardware simulation", "Real-time encoding", "Educational tool"]
+      title: "ASL Recognition",
+      description: "Deep learning based system capable of recognizing American Sign Language gestures in real-time using computer vision.",
+      tags: ["Computer Vision", "TensorFlow", "OpenCV"],
+      github: "https://github.com/harininr"
+    },
+    {
+      title: "Rabin-Karp Content Mod",
+      description: "Optimized algorithm implementation for real-time text modification and pattern matching in large-scale content systems.",
+      tags: ["Algorithms", "C++", "Data Structures"],
+      github: "https://github.com/harininr"
+    },
+    {
+      title: "SkillBridge",
+      description: "Networking platform connecting industry experts with students for mentorship and skill development through structured modules.",
+      tags: ["React", "Node.js", "Socket.io"],
+      github: "https://github.com/harininr"
     }
   ];
 
   return (
-    <section className="section" id="projects">
-      <h2 className="section-title">Featured Projects</h2>
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <div className="project-card" key={index}>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div className="project-tags">
-              {project.tags.map((tag, i) => (
-                <span className="tag" key={i}>{tag}</span>
-              ))}
-            </div>
-            <ul className="project-features">
-              {project.features.map((feature, i) => (
-                <li key={i}>✨ {feature}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+    <section id="projects" className="py-24 relative">
+      <div className="container mx-auto px-6">
+        <div className="mb-20 text-center md:text-left">
+          <motion.h2
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl md:text-7xl font-playfair font-bold mb-6 tracking-normal"
+          >
+            Featured Projects
+          </motion.h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            className="h-1 w-full max-w-md bg-gradient-to-r from-sage to-transparent origin-left"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard key={index} {...project} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
