@@ -79,20 +79,8 @@ const Projects = () => {
     },
     {
       title: "RightPath",
-      description: "AI-driven career guidance system that analyzes user skills and preferences to suggest personalized educational and professional paths.",
+      description: "An intelligent coding companion that fosters critical thinking. Instead of providing direct answers, it analyzes code to guide learners on the right track using simple, non-technical language.",
       tags: ["AI/ML", "Python", "Flask", "React"],
-      github: "https://github.com/harininr"
-    },
-    {
-      title: "OneSheet",
-      description: "A centralized dashboard for students to manage all their academic resources, assignments, and schedules in one elegant interface.",
-      tags: ["React", "Tailwind", "Firebase"],
-      github: "https://github.com/harininr"
-    },
-    {
-      title: "AuraGlow",
-      description: "E-commerce platform for premium skincare products, featuring a sophisticated UI/UX with glassmorphism and immersive product galleries.",
-      tags: ["React", "Stripe", "Redux", "GSAP"],
       github: "https://github.com/harininr"
     }
   ];
