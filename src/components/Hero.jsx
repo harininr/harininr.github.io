@@ -147,10 +147,10 @@ const Hero = () => {
             </motion.div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
-              <StatItem icon={Code2} label="Projects" value="8+" delay={0.3} />
+              <StatItem icon={Code2} label="Projects" value="15+" delay={0.3} />
               <StatItem icon={Briefcase} label="Internships" value="2" delay={0.4} />
-              <StatItem icon={Award} label="AWS Certified" value="2" delay={0.5} />
-              <StatItem icon={Cpu} label="AI/ML" value="Expert" delay={0.6} />
+              <StatItem icon={Award} label="Industry Certifications" value="2" delay={0.5} />
+              <StatItem icon={Cpu} label="Deployed models" value="5+" delay={0.6} />
             </div>
 
             <motion.div
