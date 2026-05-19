@@ -36,7 +36,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 my-auto lg:items-stretch items-center">
 
           {/* Left Column - Hero Branding & CTA */}
-          <div className="flex flex-col items-center text-center justify-center lg:col-span-6 h-full">
+          <div className="flex flex-col items-center text-center justify-center lg:justify-between lg:col-span-6 h-full">
             {/* Elegant Profile Picture */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -125,33 +125,46 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Crafting Intelligent Solutions */}
-          <div className="lg:col-span-6 flex flex-col text-left justify-between h-full">
+          <div className="lg:col-span-6 flex flex-col justify-center lg:justify-between h-full items-center text-center">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-3xl md:text-4xl font-playfair font-bold mb-6 tracking-normal text-beige"
             >
-              Crafting <span className="text-sage">Intelligent Solutions</span>
+              Where <span className="text-sage">Code</span> meets <span className="text-sage">Creativity</span>
             </motion.h2>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex-1 flex items-center text-base text-sage/80 leading-relaxed mb-6 font-light bg-sage/5 p-6 rounded-2xl border border-sage/10 backdrop-blur-sm shadow-xl"
+              className="text-base text-sage/80 leading-relaxed mb-6 font-light bg-sage/5 p-6 rounded-2xl border border-sage/10 backdrop-blur-sm shadow-xl w-full"
             >
               <p>
-                Passionate Computer Science undergraduate at Amrita Vishwa Vidyapeetham with hands-on experience in software development, AI-ML systems, and cloud technologies. Skilled in building scalable web applications, intelligent systems, and impactful academic projects. Experienced working in fast-paced internship environments involving full-stack development and machine learning workflows. Strong interest in AI-powered products, cloud computing, and modern software engineering.
+                At the intersection of logic and creativity, I build elegant digital experiences that merge intelligent engineering with purposeful design. As a pre-final year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham, I am passionate about full-stack development, AI/ML innovation, and scalable cloud technologies. I enjoy transforming ideas into impactful products that are technically sophisticated, intuitive to use, and designed to solve real-world challenges.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
               <StatItem icon={Code2} label="Projects" value="8+" delay={0.3} />
               <StatItem icon={Briefcase} label="Internships" value="2" delay={0.4} />
               <StatItem icon={Award} label="AWS Certified" value="2" delay={0.5} />
               <StatItem icon={Cpu} label="AI/ML" value="Expert" delay={0.6} />
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              className="mt-6 flex items-center justify-center gap-2.5 text-white text-sm md:text-base font-semibold tracking-wide bg-gradient-to-r from-maroon to-maroon-light px-6 py-3 rounded-full border border-white/10 w-fit mx-auto shadow-[0_4px_20px_rgba(128,0,0,0.25)] hover:shadow-[0_6px_25px_rgba(128,0,0,0.35)] hover:scale-105 transition-all duration-300 cursor-pointer"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+              </span>
+              <span>Open for internships & collaborations</span>
+            </motion.div>
           </div>
 
         </div>

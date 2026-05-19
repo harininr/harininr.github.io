@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, MessageSquare } from 'lucide-react';
+import { Mail, Phone, Send, Github, Linkedin, MessageSquare } from 'lucide-react';
 
 const ContactInfo = ({ icon: Icon, label, value, link }) => (
   <a
     href={link}
     target="_blank"
     rel="noreferrer"
-    className="group flex items-center gap-4 p-4 glass-card rounded-2xl hover:border-sage/40 transition-all duration-300"
+    className="group flex items-center gap-4 p-4 glass-card rounded-2xl hover:border-sage/40 transition-all duration-300 lg:flex-1"
   >
     <div className="w-11 h-11 bg-sage/10 rounded-xl flex items-center justify-center text-sage group-hover:scale-110 group-hover:bg-sage/20 transition-all duration-300 shrink-0">
       <Icon size={20} />
@@ -105,12 +105,12 @@ const Contact = () => {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-stretch">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-2 grid grid-cols-2 lg:grid-cols-1 gap-4"
+              className="lg:col-span-2 grid grid-cols-2 lg:flex lg:flex-col lg:justify-between gap-4 h-full"
             >
               <ContactInfo
                 icon={Mail}
@@ -131,10 +131,10 @@ const Contact = () => {
                 link="https://github.com/harininr"
               />
               <ContactInfo
-                icon={MapPin}
-                label="Location"
-                value="Coimbatore, India"
-                link="#"
+                icon={Phone}
+                label="Phone"
+                value="+91 89460 51393"
+                link="tel:+918946051393"
               />
             </motion.div>
 
@@ -142,9 +142,9 @@ const Contact = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-3"
+              className="lg:col-span-3 h-full"
             >
-              <div className="glass-card p-6 rounded-2xl border border-sage/10 relative overflow-hidden">
+              <div className="glass-card p-6 rounded-2xl border border-sage/10 relative overflow-hidden h-full flex flex-col justify-between">
                 <div className="absolute top-0 right-0 p-4 opacity-5">
                    <MessageSquare size={100} className="text-sage" />
                 </div>

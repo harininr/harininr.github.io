@@ -17,21 +17,9 @@ const ProjectCard = ({ title, description, tags, github, demo, index }) => (
         <div className="w-12 h-12 bg-sage/10 rounded-2xl flex items-center justify-center text-sage">
           <Layers size={24} />
         </div>
-        <div className="flex gap-3">
-          {github && (
-            <a href={github} target="_blank" rel="noreferrer" className="p-2 glass rounded-full text-sage/60 hover:text-beige transition-colors">
-              <Github size={20} />
-            </a>
-          )}
-          {demo && (
-            <a href={demo} target="_blank" rel="noreferrer" className="p-2 glass rounded-full text-sage/60 hover:text-beige transition-colors">
-              <ExternalLink size={20} />
-            </a>
-          )}
-        </div>
       </div>
 
-      <h3 className="text-2xl font-bold text-beige mb-4 group-hover:text-sage transition-colors duration-300">{title}</h3>
+      <h3 className="text-2xl font-playfair font-bold text-beige mb-4 group-hover:text-sage transition-colors duration-300">{title}</h3>
       <p className="text-beige/80 font-light text-sm leading-relaxed mb-6 flex-grow bg-sage/5 p-4 rounded-xl border border-sage/10 backdrop-blur-sm">
         {description}
       </p>
@@ -44,13 +32,28 @@ const ProjectCard = ({ title, description, tags, github, demo, index }) => (
         ))}
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="w-full py-3 bg-sage/10 hover:bg-sage text-sage hover:text-white font-bold rounded-2xl transition-all duration-300 border border-sage/20"
-      >
-        Explore Case Study
-      </motion.button>
+      <div className="flex gap-4 mt-auto">
+        {github && (
+          <a href={github} target="_blank" rel="noreferrer" className="flex-1">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full py-3 bg-sage/10 hover:bg-sage text-sage hover:text-white font-bold rounded-2xl transition-all duration-300 border border-sage/20 text-center text-sm"
+            >
+              Explore
+            </motion.button>
+          </a>
+        )}
+        <a href={demo || github} target="_blank" rel="noreferrer" className="flex-1">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full py-3 bg-sage text-white hover:bg-sage/90 font-bold rounded-2xl transition-all duration-300 shadow-md text-center text-sm"
+          >
+            View Live
+          </motion.button>
+        </a>
+      </div>
       
       {/* 3D Reflection Effect */}
       <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -64,13 +67,15 @@ const Projects = () => {
       title: "Amrita Placement Tracker",
       description: "A comprehensive platform to track and manage student placement data, featuring real-time analytics and reporting for administrators and students.",
       tags: ["React", "Node.js", "MySQL", "Chart.js"],
-      github: "https://github.com/harininr"
+      github: "https://github.com/harininr",
+      demo: "https://amrita-placement-tracker.vercel.app/"
     },
     {
       title: "CyberLearn",
       description: "An interactive e-learning platform focused on cybersecurity, providing hands-on labs and progress tracking for budding security enthusiasts.",
       tags: ["Full Stack", "MongoDB", "Express", "Auth"],
-      github: "https://github.com/harininr"
+      github: "https://github.com/harininr",
+      demo: "https://cyberlearn-simulator.onrender.com/"
     },
     {
       title: "RightPath",
@@ -88,24 +93,6 @@ const Projects = () => {
       title: "AuraGlow",
       description: "E-commerce platform for premium skincare products, featuring a sophisticated UI/UX with glassmorphism and immersive product galleries.",
       tags: ["React", "Stripe", "Redux", "GSAP"],
-      github: "https://github.com/harininr"
-    },
-    {
-      title: "ASL Recognition",
-      description: "Deep learning based system capable of recognizing American Sign Language gestures in real-time using computer vision.",
-      tags: ["Computer Vision", "TensorFlow", "OpenCV"],
-      github: "https://github.com/harininr"
-    },
-    {
-      title: "Rabin-Karp Content Mod",
-      description: "Optimized algorithm implementation for real-time text modification and pattern matching in large-scale content systems.",
-      tags: ["Algorithms", "C++", "Data Structures"],
-      github: "https://github.com/harininr"
-    },
-    {
-      title: "SkillBridge",
-      description: "Networking platform connecting industry experts with students for mentorship and skill development through structured modules.",
-      tags: ["React", "Node.js", "Socket.io"],
       github: "https://github.com/harininr"
     }
   ];
@@ -130,9 +117,11 @@ const Projects = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} index={index} />
+            <div key={index} className="w-full md:w-[calc(50%-16px)] lg:w-[calc(33.33%-22px)] flex flex-col">
+              <ProjectCard {...project} index={index} />
+            </div>
           ))}
         </div>
       </div>

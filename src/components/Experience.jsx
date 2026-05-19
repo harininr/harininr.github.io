@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { Briefcase, Calendar, ExternalLink } from 'lucide-react';
 
-const ExperienceCard = ({ company, role, duration, location, description, delay }) => (
+const ExperienceCard = ({ company, link, role, duration, description, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay, duration: 0.6 }}
-    className="glass-card p-8 rounded-3xl group relative overflow-hidden"
+    className="glass-card p-8 rounded-3xl group relative overflow-hidden h-full flex flex-col"
   >
     <div className="absolute top-0 right-0 w-32 h-32 bg-sage/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
     
@@ -17,22 +17,29 @@ const ExperienceCard = ({ company, role, duration, location, description, delay 
         <div className="flex items-center gap-3 text-sage mb-2">
           <Briefcase size={20} />
           <span className="font-bold tracking-widest uppercase text-sm">{company}</span>
+          {link && (
+            <a 
+              href={link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center justify-center p-1 rounded-full bg-sage/5 border border-sage/10 text-sage/75 hover:bg-sage hover:text-white transition-all duration-300 hover:scale-105"
+              title={`Visit ${company}`}
+            >
+              <ExternalLink size={12} />
+            </a>
+          )}
         </div>
-        <h3 className="text-2xl font-bold text-beige group-hover:text-sage transition-colors duration-300">{role}</h3>
+        <h3 className="text-2xl font-playfair font-bold text-beige group-hover:text-sage transition-colors duration-300">{role}</h3>
       </div>
       <div className="flex flex-col items-start md:items-end gap-2 text-sage/60 text-sm">
         <div className="flex items-center gap-2">
           <Calendar size={16} />
           <span>{duration}</span>
         </div>
-        <div className="flex items-center gap-2">
-          <MapPin size={16} />
-          <span>{location}</span>
-        </div>
       </div>
     </div>
 
-    <ul className="space-y-3 bg-sage/5 p-4 rounded-xl border border-sage/10 backdrop-blur-sm">
+    <ul className="space-y-3 bg-sage/5 p-4 rounded-xl border border-sage/10 backdrop-blur-sm flex-grow">
       {description.map((item, idx) => (
         <li key={idx} className="flex items-start gap-3 text-beige/80 font-light leading-relaxed">
           <div className="mt-2 w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
@@ -54,24 +61,24 @@ const Experience = () => {
   const experiences = [
     {
       company: "Ubayog",
+      link: "https://ubayog.com/",
       role: "Software Developer Intern",
-      duration: "Jan 2024 - Present",
-      location: "Remote",
+      duration: "March 2026 - Present",
       description: [
-        "Worked on scalable software solutions and marketplace-related modules.",
-        "Contributed to frontend and backend development.",
-        "Improved UI/UX workflows and implemented modern web features."
+        "Contributed to rebuilding an existing platform into a production-grade AI-native marketplace focused on scalability and modern user experience.",
+        "Collaborated on a multi-agent AI architecture involving 7 interconnected agents for intelligent workflow automation and orchestration.",
+        "Worked across frontend and backend systems, improving UI/UX, integrating modern technologies, and enhancing application performance."
       ]
     },
     {
       company: "Wekan Enterprise Solutions",
+      link: "https://www.wekanenterprisesolutions.com/",
       role: "AI-ML Intern",
-      duration: "June 2023 - Aug 2023",
-      location: "Coimbatore, India",
+      duration: "February 2026 - Present",
       description: [
-        "Worked on AI/ML workflows and intelligent automation concepts.",
-        "Built and experimented with machine learning-based systems.",
-        "Gained practical exposure to real-world AI development pipelines."
+        "Replicated and analyzed methodologies from MIDL research papers to understand advanced AI/ML architectures and workflows.",
+        "Implemented novel improvements through experimentation with model optimization and data processing techniques.",
+        "Contributed to AI/ML research and publication efforts involving experimentation, evaluation, and technical documentation."
       ]
     }
   ];
@@ -89,15 +96,6 @@ const Experience = () => {
             >
               Professional <span className="text-sage">Experience</span>
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-sage/60 text-lg"
-            >
-              A journey through internships and real-world impact.
-            </motion.p>
           </div>
           <div className="hidden md:block h-px flex-1 bg-gradient-to-r from-sage/20 to-transparent mx-8 mb-4" />
         </div>

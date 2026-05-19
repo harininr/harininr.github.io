@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, CheckCircle, ExternalLink } from 'lucide-react';
 
-const CertificationCard = ({ title, issuer, date, delay }) => (
+const CertificationCard = ({ title, issuer, date, link, delay }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.9 }}
     whileInView={{ opacity: 1, scale: 1 }}
@@ -16,23 +16,24 @@ const CertificationCard = ({ title, issuer, date, delay }) => (
         <div className="w-14 h-14 bg-sage/10 rounded-2xl flex items-center justify-center text-sage group-hover:scale-110 transition-transform duration-300">
           <Award size={32} />
         </div>
-        <div className="px-3 py-1 bg-sage/5 rounded-full border border-sage/10 flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-sage animate-pulse" />
-          <span className="text-[10px] uppercase tracking-widest text-sage font-bold">Verified</span>
-        </div>
       </div>
       
-      <h3 className="text-xl font-bold text-beige mb-2 group-hover:text-sage transition-colors duration-300">{title}</h3>
+      <h3 className="text-xl font-playfair font-bold text-beige mb-2 group-hover:text-sage transition-colors duration-300">{title}</h3>
       <p className="text-sage/60 font-medium mb-4">{issuer}</p>
       
       <div className="mt-auto pt-6 border-t border-sage/10 flex justify-between items-center">
         <span className="text-sm text-sage/40">{date}</span>
-        <motion.button
-          whileHover={{ x: 5 }}
-          className="text-sage hover:text-beige transition-colors"
-        >
-          <ExternalLink size={18} />
-        </motion.button>
+        {link && (
+          <motion.a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ x: 5 }}
+            className="text-sage hover:text-beige transition-colors"
+          >
+            <ExternalLink size={18} />
+          </motion.a>
+        )}
       </div>
 
       {/* Shine effect */}
@@ -59,17 +60,20 @@ const Certifications = () => {
     {
       title: "AWS Certified Cloud Practitioner (CLF-C02)",
       issuer: "Amazon Web Services",
-      date: "Dec 2023"
+      date: "July 2025",
+      link: "https://www.credly.com/badges/b36e3ee5-b31c-430c-84e8-58d9eae5b500/public_url"
     },
     {
       title: "AWS Certified AI Practitioner (AIF-C01)",
       issuer: "Amazon Web Services",
-      date: "Feb 2024"
+      date: "January 2026",
+      link: "https://www.credly.com/badges/6645d3ad-00fd-4ffb-95be-e06d1f4d0643"
     },
     {
       title: "Amrita AWS Academy – Cloud Practitioner",
       issuer: "Amrita Vishwa Vidyapeetham",
-      date: "2023"
+      date: "2023",
+      link: "https://drive.google.com/file/d/1U3JNiYbrj10sgpxHyUxETRvt0C-0Q5oJ/view"
     },
     {
       title: "Applied AI-ML Essentials",
