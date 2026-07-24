@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, ExternalLink } from 'lucide-react';
+import { Briefcase, Calendar, ExternalLink, Award } from 'lucide-react';
 
-const ExperienceCard = ({ company, link, role, duration, description, delay }) => (
+const ExperienceCard = ({ company, link, role, duration, description, certificate, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -26,6 +26,17 @@ const ExperienceCard = ({ company, link, role, duration, description, delay }) =
               title={`Visit ${company}`}
             >
               <ExternalLink size={12} />
+            </a>
+          )}
+          {certificate && (
+            <a 
+              href={certificate} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center justify-center p-1 rounded-full bg-sage/5 border border-sage/10 text-sage/75 hover:bg-sage hover:text-white transition-all duration-300 hover:scale-105"
+              title="View Certificate"
+            >
+              <Award size={12} />
             </a>
           )}
         </div>
@@ -62,8 +73,9 @@ const Experience = () => {
     {
       company: "Ubayog",
       link: "https://ubayog.com/",
+      certificate: "https://drive.google.com/file/d/1ywVVDJzRD4eafNamf_ktf-n5EOQkAPp_/view?usp=sharing",
       role: "Software Developer Intern",
-      duration: "March 2026 - Present",
+      duration: "April 2026 - July 2026",
       description: [
         "Contributed to rebuilding an existing platform into a production-grade AI-native marketplace focused on scalability and modern user experience.",
         "Collaborated on a multi-agent AI architecture involving 7 interconnected agents for intelligent workflow automation and orchestration.",
